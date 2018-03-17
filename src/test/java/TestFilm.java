@@ -13,7 +13,7 @@ public class TestFilm {
 
     @Before
     public void before(){
-        film = new Film("Peter Rabbit", "Will Gluck", null);
+        film = new Film("Peter Rabbit", "Will Gluck","James Corden",null);
         actor = new Actor("James Corden", 35, 120000);
         DBHelper.saveOrUpdate(film);
         DBHelper.saveOrUpdate(actor);

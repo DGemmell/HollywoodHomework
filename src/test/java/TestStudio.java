@@ -12,7 +12,7 @@ public class TestStudio {
 
     @Before
     public void before(){
-        studio = new Studio("Hollywood Studios", "California");
+        studio = new Studio("Hollywood Studios", "California", null);
         DBHelper.saveOrUpdate(studio);
 
     }

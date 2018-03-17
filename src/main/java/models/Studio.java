@@ -1,6 +1,7 @@
 package models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "studio")
@@ -9,13 +10,15 @@ public class Studio {
     private int id;
     private String studioname;
     private String location;
+    private List<Film> films;
 
     public Studio() {
     }
 
-    public Studio(String studioname, String location) {
+    public Studio(String studioname, String location,List<Film> films) {
         this.studioname = studioname;
         this.location = location;
+        this.films = films;
     }
 
     @Id
@@ -45,5 +48,14 @@ public class Studio {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    @OneToMany (mappedBy = "studio")
+    public List<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(List<Film> films) {
+        this.films = films;
     }
 }

@@ -10,15 +10,17 @@ public class Film {
     private String title;
     private String director_name;
     private String actors;
+    private Studio studio;
 
     public Film() {
     }
 
 //    i would like to add a list of actors but for now i have added as string
-    public Film(String title, String director_name, String actors) {
+    public Film(String title, String director_name, String actors, Studio studio){
         this.title = title;
         this.director_name = director_name;
         this.actors = actors;
+        this.studio = studio;
     }
 
     @Id
@@ -57,5 +59,15 @@ public class Film {
 
     public void setActors(String actors) {
         this.actors = actors;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "studio_id", nullable = false)
+    public Studio getStudio() {
+        return studio;
+    }
+
+    public void setStudio(Studio studio) {
+        this.studio = studio;
     }
 }
