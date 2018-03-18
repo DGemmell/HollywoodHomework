@@ -1,45 +1,20 @@
 package models;
 
+import db.DBHelper;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name ="actor")
-public class Actor{
+@Table(name ="actors")
+public class Actor extends Employee {
 
-    private int id;
-    private String name;
     private int age;
-    private double salary;
+    private List<Film> films;
 
-    public Actor() {
-    }
-
-    public Actor(String name, int age, double salary) {
-        this.name = name;
+    public Actor(String name, double salary, int age) {
+        super(name, salary);
         this.age = age;
-        this.salary = salary;
-    }
-
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Column(name = "name")
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Column(name ="age")
@@ -51,12 +26,16 @@ public class Actor{
         this.age = age;
     }
 
-    @Column(name ="salary")
-    public double getSalary() {
-        return salary;
+    @ManyToMany
+    @JoinTable(name = "actors_films",
+            joinColumns = {@JoinColumn(name = "actor_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "film_id", nullable = false, updatable = false)}
+    )
+    public List<Film> getFilms() {
+        return films;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public void setFilms(List<Film> films) {
+        this.films = films;
     }
 }

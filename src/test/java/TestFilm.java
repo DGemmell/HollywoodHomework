@@ -1,5 +1,6 @@
 import db.DBHelper;
-import models.Actor;
+import models.Director;
+import models.Employee;
 import models.Film;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,14 +10,13 @@ import static junit.framework.TestCase.assertEquals;
 public class TestFilm {
 
     private Film film;
-    private Actor actor;
+    private Director director;
+
 
     @Before
     public void before(){
-        film = new Film("Peter Rabbit", "Will Gluck","James Corden",null);
-        actor = new Actor("James Corden", 35, 120000);
+        film = new Film("Peter Rabbit", null,null,null);
         DBHelper.saveOrUpdate(film);
-        DBHelper.saveOrUpdate(actor);
     }
 
     @Test
@@ -28,8 +28,8 @@ public class TestFilm {
 
     @Test
     public void canSaveActor(){
-        Actor found = DBHelper.find(Actor.class, actor.getId());
-        assertEquals("James Corden", found.getName());
+        Director found = DBHelper.find(Director.class, director.getId());
+        assertEquals("comedy", found.getGenre());
 
     }
 
