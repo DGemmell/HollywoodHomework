@@ -1,6 +1,5 @@
 import db.DBHelper;
 import models.Director;
-import models.Employee;
 import models.Film;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +14,7 @@ public class TestFilm {
 
     @Before
     public void before(){
-        film = new Film("Peter Rabbit", null,null,null);
+        film = new Film("Peter Rabbit", null,null);
         DBHelper.saveOrUpdate(film);
     }
 

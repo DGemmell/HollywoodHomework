@@ -1,5 +1,6 @@
 package models;
 
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,12 +11,12 @@ public class Studio {
     private int id;
     private String studioname;
     private String location;
-    private List<Film> films;
+    private String films;
 
     public Studio() {
     }
 
-    public Studio(String studioname, String location,List<Film> films) {
+    public Studio(String studioname, String location,String films) {
         this.studioname = studioname;
         this.location = location;
         this.films = films;
@@ -50,12 +51,7 @@ public class Studio {
         this.location = location;
     }
 
-    @OneToMany (mappedBy = "studio")
-    public List<Film> getFilms() {
-        return films;
-    }
-
-    public void setFilms(List<Film> films) {
+    public Studio(String films) {
         this.films = films;
     }
 }

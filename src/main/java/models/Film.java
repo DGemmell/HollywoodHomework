@@ -1,26 +1,27 @@
 package models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "film")
 public class Film {
     private int id;
     private String title;
-    private List<Actor> actors;
     private Studio studio;
     private Director director;
+    private Set<Actor> actors;
 
     public Film() {
     }
 
-    public Film(String title, List<Actor> actors, Studio studio, Director director){
+    public Film(String title, Studio studio, Director director){
         this.title = title;
-        this.actors = new ArrayList<Actor>();
         this.studio = studio;
         this.director = director;
+        this.actors = new HashSet<Actor>();
     }
 
     @Id
@@ -46,11 +47,11 @@ public class Film {
 //    mapping for film and actor many to many
 
     @ManyToMany(mappedBy = "film", fetch = FetchType.EAGER)
-    public List<Actor> getActors() {
+    public Set<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
 

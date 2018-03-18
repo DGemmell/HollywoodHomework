@@ -1,20 +1,59 @@
 package models;
 
-import db.DBHelper;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name ="actors")
-public class Actor extends Employee {
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Actor {
 
+    private int id;
+    private String name;
+    private double salary;
     private int age;
-    private List<Film> films;
+    private Set<Film> films;
+
+    public Actor() {
+    }
 
     public Actor(String name, double salary, int age) {
-        super(name, salary);
+        this.name = name;
+        this.salary = salary;
         this.age = age;
+        this.films = new HashSet<Film>();
+    }
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name ="salary")
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     @Column(name ="age")
@@ -31,11 +70,11 @@ public class Actor extends Employee {
             joinColumns = {@JoinColumn(name = "actor_id", nullable = false, updatable = false)},
             inverseJoinColumns = {@JoinColumn(name = "film_id", nullable = false, updatable = false)}
     )
-    public List<Film> getFilms() {
+    public Set<Film> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Film> films) {
+    public void setFilms(Set<Film> films) {
         this.films = films;
     }
 }

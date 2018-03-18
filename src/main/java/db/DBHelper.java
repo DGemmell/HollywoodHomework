@@ -16,6 +16,7 @@ public class DBHelper {
 
     public static void saveOrUpdate(Object object) {
 
+
         session = HibernateUtil.getSessionFactory().openSession();
         try {
             transaction = session.beginTransaction();
@@ -28,6 +29,20 @@ public class DBHelper {
             session.close();
         }
 
+    }
+
+    public static void delete(Object object){
+        session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            transaction = session.beginTransaction();
+            session.delete(object);
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
 
@@ -45,6 +60,8 @@ public class DBHelper {
         }
         return results;
     }
+
+
 
 //    to bring back an individual thing/type rather than a list.
 

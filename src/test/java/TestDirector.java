@@ -11,7 +11,7 @@ public class TestDirector {
 
     @Before
     public void before(){
-        director = new Director(null, 0, null,null);
+        director = new Director(null, 0, "comedy");
         DBHelper.saveOrUpdate(director);
     }
 

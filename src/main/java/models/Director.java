@@ -1,29 +1,62 @@
 package models;
 
-import behaviours.IDirect;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="director")
-public class Director extends Employee implements IDirect {
+public class Director {
 
+    private int id;
+    private String name;
+    private double salary;
     private String genre;
-    private List<Film> films;
+    private Set<Film> films;
 
     public Director(){
 
     }
 
-    public Director(String name, double salary, String genre, List<Film> films) {
-        super(name, salary);
+    public Director(String name, double salary, String genre) {
+        this.name = name;
+        this.salary = salary;
         this.genre = genre;
-        this.films = films;
+        this.films = new HashSet<Film>();
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Column(name="name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name="salary")
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    @Column(name="genre")
     public String getGenre() {
         return genre;
     }
@@ -32,17 +65,11 @@ public class Director extends Employee implements IDirect {
         this.genre = genre;
     }
 
-//    how can i add two behaviours action and cut?
-    public String direct() {
-        return "Action!";
-    }
-
-    @OneToMany(mappedBy = "director")
-    public List<Film> getFilms() {
+    public Set<Film> getFilms() {
         return films;
     }
 
-    public void setFilms(List<Film> films) {
+    public void setFilms(Set<Film> films) {
         this.films = films;
     }
 }
