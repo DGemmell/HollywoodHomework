@@ -65,6 +65,7 @@ public class Director {
         this.genre = genre;
     }
 
+    @OneToMany (mappedBy = "director")
     public Set<Film> getFilms() {
         return films;
     }

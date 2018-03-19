@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "film")
+@Table(name = "films")
 public class Film {
     private int id;
     private String title;
@@ -46,7 +46,7 @@ public class Film {
 
 //    mapping for film and actor many to many
 
-    @ManyToMany(mappedBy = "film", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "films", fetch = FetchType.EAGER)
     public Set<Actor> getActors() {
         return actors;
     }
